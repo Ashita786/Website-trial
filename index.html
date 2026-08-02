@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FoodVibe — Discover the Vibe Before You Dine</title>
+<meta name="description" content="Match your mood to the perfect restaurant, book a table instantly, and earn rewards with every bite.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+</head>
+<body>
+
+<!-- ─── Icon sprite (lucide geometry: 24×24, stroke 2, round caps) ─────────── -->
+<svg width="0" height="0" class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+  <symbol id="i-badge-check" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+  <symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+</svg>
+
+<!-- ─── Navbar ──────────────────────────────────────────────────────────────── -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a class="logo" href="#top">
+      <span class="logo-mark">🍽️</span>
+      <span class="logo-text">FoodVibe</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Main">
+      <a href="#trending">Explore</a>
+      <a href="#deals">Offers</a>
+      <a href="#rewards">Rewards</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon icon-sm" id="theme-icon"><use href="#i-moon"></use></svg>
+      </button>
+      <button class="icon-btn" aria-label="Notifications">
+        <svg class="icon icon-sm"><use href="#i-bell"></use></svg>
+        <span class="notif-dot"></span>
+      </button>
+      <button class="btn-gradient btn-signin">Sign In</button>
+      <button class="icon-btn icon-btn-mobile" aria-label="Account">
+        <svg class="icon icon-sm"><use href="#i-user"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ─── Hero ────────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1800&h=1000&fit=crop&auto=format" alt="Vibrant food spread">
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="hero-floats" aria-hidden="true">
+    <span style="left:4%;top:18%;animation-delay:0s;animation-duration:2.2s">🍕</span>
+    <span style="left:18%;top:12%;animation-delay:.35s;animation-duration:2.45s">🍣</span>
+    <span style="left:78%;top:16%;animation-delay:.7s;animation-duration:2.7s">🌮</span>
+    <span style="left:88%;top:28%;animation-delay:1.05s;animation-duration:2.95s">☕</span>
+    <span style="left:8%;top:62%;animation-delay:1.4s;animation-duration:3.2s">🍔</span>
+    <span style="left:82%;top:58%;animation-delay:1.75s;animation-duration:3.45s">🥗</span>
+  </div>
+
+  <div class="hero-content">
+    <div class="rise" style="--delay:0s">
+      <p class="pill-badge">
+        <svg class="icon icon-12 accent"><use href="#i-sparkles"></use></svg>
+        AI-Powered Restaurant Discovery
+        <svg class="icon icon-12 accent"><use href="#i-sparkles"></use></svg>
+      </p>
+
+      <h1 class="hero-title">
+        Discover the <span class="grad-text grad-text-warm">Vibe</span><br>Before You Dine.
+      </h1>
+
+      <p class="hero-sub">
+        Match your mood to the perfect restaurant, book a table instantly,
+        and earn rewards with every bite. 🫶
+      </p>
+    </div>
+
+    <!-- Search card -->
+    <div class="search-card rise" style="--delay:.18s">
+      <div class="search-tabs" role="tablist">
+        <button class="tab is-active" role="tab" aria-selected="true">📍 By City</button>
+        <button class="tab" role="tab" aria-selected="false">🧭 Near Me</button>
+        <button class="tab" role="tab" aria-selected="false">🍽️ Cuisine</button>
+        <button class="tab" role="tab" aria-selected="false">🎉 Occasion</button>
+      </div>
+
+      <div class="search-fields">
+        <div class="field">
+          <svg class="icon icon-17 c-primary"><use href="#i-map-pin"></use></svg>
+          <div class="field-body">
+            <label class="field-label" for="loc">Location</label>
+            <input class="field-input" id="loc" type="text" placeholder="Mumbai, India">
+          </div>
+        </div>
+
+        <div class="field is-clickable">
+          <svg class="icon icon-17 c-accent"><use href="#i-calendar"></use></svg>
+          <div class="field-body">
+            <span class="field-label">Date</span>
+            <span class="field-value">Today, Aug 2</span>
+          </div>
+        </div>
+
+        <div class="field is-clickable">
+          <svg class="icon icon-17 c-secondary"><use href="#i-clock"></use></svg>
+          <div class="field-body">
+            <span class="field-label">Time</span>
+            <span class="field-value">7:30 PM</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <svg class="icon icon-17 c-violet"><use href="#i-users"></use></svg>
+          <div class="field-body">
+            <span class="field-label">Guests</span>
+            <div class="stepper">
+              <button class="step-btn" data-step="-1" aria-label="Fewer guests">−</button>
+              <span class="step-value" id="guest-count">2</span>
+              <button class="step-btn" data-step="1" aria-label="More guests">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-gradient btn-search">
+        <svg class="icon icon-19"><use href="#i-search"></use></svg>
+        Find My Vibe
+      </button>
+    </div>
+
+    <div class="hero-stats rise" style="--delay:.5s">
+      <div><span class="stat-num">12K+</span><span class="stat-label">Restaurants</span></div>
+      <div><span class="stat-num">2M+</span><span class="stat-label">Happy Diners</span></div>
+      <div><span class="stat-num">50+</span><span class="stat-label">Cities</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Categories ──────────────────────────────────────────────────────────── -->
+<section class="section section-tight">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h-md">Browse by Cuisine</h2>
+      <button class="link-btn">See all <svg class="icon icon-14"><use href="#i-chevron-right"></use></svg></button>
+    </div>
+    <div class="chip-row scroll-x" id="category-row">
+      <button class="chip is-active"><span class="chip-icon">🍕</span>Pizza</button>
+      <button class="chip"><span class="chip-icon">☕</span>Cafe</button>
+      <button class="chip"><span class="chip-icon">🍜</span>Asian</button>
+      <button class="chip"><span class="chip-icon">🥗</span>Healthy</button>
+      <button class="chip"><span class="chip-icon">🍔</span>Burgers</button>
+      <button class="chip"><span class="chip-icon">🍷</span>Fine Dining</button>
+      <button class="chip"><span class="chip-icon">🌮</span>Mexican</button>
+      <button class="chip"><span class="chip-icon">🥘</span>Indian</button>
+      <button class="chip"><span class="chip-icon">🍣</span>Sushi</button>
+      <button class="chip"><span class="chip-icon">🍰</span>Dessert</button>
+      <button class="chip"><span class="chip-icon">🍺</span>Bar &amp; Grill</button>
+      <button class="chip"><span class="chip-icon">🥐</span>Bakery</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Trending ────────────────────────────────────────────────────────────── -->
+<section class="section section-tight" id="trending">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2 class="h-lg with-icon">
+          <svg class="icon icon-lg c-primary"><use href="#i-flame"></use></svg>
+          Trending Now
+        </h2>
+        <p class="section-sub">Most booked restaurants this week</p>
+      </div>
+      <button class="link-btn hide-xs">See all <svg class="icon icon-14"><use href="#i-chevron-right"></use></svg></button>
+    </div>
+
+    <div class="card-rail scroll-x">
+
+      <article class="r-card">
+        <div class="r-media">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=400&fit=crop&auto=format" alt="The Rooftop Garden">
+          <div class="r-scrim"></div>
+          <div class="r-top">
+            <span class="r-badge">🔥 Trending</span>
+            <button class="fav-btn" aria-label="Add to favorites" aria-pressed="false">
+              <svg class="icon icon-14"><use href="#i-heart"></use></svg>
+            </button>
+          </div>
+          <span class="r-offer">20% OFF</span>
+          <span class="r-verified"><svg class="icon icon-xs c-secondary"><use href="#i-badge-check"></use></svg>Verified</span>
+        </div>
+        <div class="r-body">
+          <div class="r-title-row">
+            <h3 class="r-name">The Rooftop Garden</h3>
+            <span class="r-rating"><svg class="icon icon-xs filled"><use href="#i-star"></use></svg>4.8</span>
+          </div>
+          <p class="r-cuisine">Italian · Mediterranean</p>
+          <div class="r-meta">
+            <span><svg class="icon icon-xxs"><use href="#i-map-pin"></use></svg>1.2 km</span><span>·</span>
+            <span>₹1,800 for 2</span><span>·</span><span>2.3k reviews</span>
+          </div>
+          <div class="tag-row"><span class="tag">Rooftop</span><span class="tag">Live Music</span></div>
+          <button class="btn-gradient btn-book">Book Now</button>
+        </div>
+      </article>
+
+      <article class="r-card">
+        <div class="r-media">
+          <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600&h=400&fit=crop&auto=format" alt="Sakura Tokyo">
+          <div class="r-scrim"></div>
+          <div class="r-top">
+            <span class="r-badge">⭐ Top Rated</span>
+            <button class="fav-btn" aria-label="Add to favorites" aria-pressed="false">
+              <svg class="icon icon-14"><use href="#i-heart"></use></svg>
+            </button>
+          </div>
+          <span class="r-offer">Free Miso Soup</span>
+          <span class="r-verified"><svg class="icon icon-xs c-secondary"><use href="#i-badge-check"></use></svg>Verified</span>
+        </div>
+        <div class="r-body">
+          <div class="r-title-row">
+            <h3 class="r-name">Sakura Tokyo</h3>
+            <span class="r-rating"><svg class="icon icon-xs filled"><use href="#i-star"></use></svg>4.9</span>
+          </div>
+          <p class="r-cuisine">Japanese · Sushi</p>
+          <div class="r-meta">
+            <span><svg class="icon icon-xxs"><use href="#i-map-pin"></use></svg>0.8 km</span><span>·</span>
+            <span>₹2,500 for 2</span><span>·</span><span>1.9k reviews</span>
+          </div>
+          <div class="tag-row"><span class="tag">Premium</span><span class="tag">Authentic</span></div>
+          <button class="btn-gradient btn-book">Book Now</button>
+        </div>
+      </article>
+
+      <article class="r-card">
+        <div class="r-media">
+          <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=400&fit=crop&auto=format" alt="Spice Route">
+          <div class="r-scrim"></div>
+          <div class="r-top">
+            <span class="r-badge">❤️ Loved</span>
+            <button class="fav-btn" aria-label="Add to favorites" aria-pressed="false">
+              <svg class="icon icon-14"><use href="#i-heart"></use></svg>
+            </button>
+          </div>
+          <span class="r-offer">Buy 1 Get 1</span>
+          <span class="r-verified"><svg class="icon icon-xs c-secondary"><use href="#i-badge-check"></use></svg>Verified</span>
+        </div>
+        <div class="r-body">
+          <div class="r-title-row">
+            <h3 class="r-name">Spice Route</h3>
+            <span class="r-rating"><svg class="icon icon-xs filled"><use href="#i-star"></use></svg>4.7</span>
+          </div>
+          <p class="r-cuisine">Indian · Mughlai</p>
+          <div class="r-meta">
+            <span><svg class="icon icon-xxs"><use href="#i-map-pin"></use></svg>2.1 km</span><span>·</span>
+            <span>₹900 for 2</span><span>·</span><span>3.2k reviews</span>
+          </div>
+          <div class="tag-row"><span class="tag">Pure Veg</span><span class="tag">Family</span></div>
+          <button class="btn-gradient btn-book">Book Now</button>
+        </div>
+      </article>
+
+      <article class="r-card">
+        <div class="r-media">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&h=400&fit=crop&auto=format" alt="The Burger Lab">
+          <div class="r-scrim"></div>
+          <div class="r-top">
+            <span class="r-badge">🆕 New</span>
+            <button class="fav-btn" aria-label="Add to favorites" aria-pressed="false">
+              <svg class="icon icon-14"><use href="#i-heart"></use></svg>
+            </button>
+          </div>
+          <span class="r-offer">Free Fries</span>
+        </div>
+        <div class="r-body">
+          <div class="r-title-row">
+            <h3 class="r-name">The Burger Lab</h3>
+            <span class="r-rating"><svg class="icon icon-xs filled"><use href="#i-star"></use></svg>4.6</span>
+          </div>
+          <p class="r-cuisine">American · Fast Casual</p>
+          <div class="r-meta">
+            <span><svg class="icon icon-xxs"><use href="#i-map-pin"></use></svg>0.5 km</span><span>·</span>
+            <span>₹600 for 2</span><span>·</span><span>4.5k reviews</span>
+          </div>
+          <div class="tag-row"><span class="tag">Trending</span><span class="tag">Quick Bites</span></div>
+          <button class="btn-gradient btn-book">Book Now</button>
+        </div>
+      </article>
+
+      <article class="r-card">
+        <div class="r-media">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop&auto=format" alt="Verde Kitchen">
+          <div class="r-scrim"></div>
+          <div class="r-top">
+            <span class="r-badge">🌿 Eco Pick</span>
+            <button class="fav-btn" aria-label="Add to favorites" aria-pressed="false">
+              <svg class="icon icon-14"><use href="#i-heart"></use></svg>
+            </button>
+          </div>
+          <span class="r-offer">15% OFF</span>
+          <span class="r-verified"><svg class="icon icon-xs c-secondary"><use href="#i-badge-check"></use></svg>Verified</span>
+        </div>
+        <div class="r-body">
+          <div class="r-title-row">
+            <h3 class="r-name">Verde Kitchen</h3>
+            <span class="r-rating"><svg class="icon icon-xs filled"><use href="#i-star"></use></svg>4.8</span>
+          </div>
+          <p class="r-cuisine">Healthy · Vegan</p>
+          <div class="r-meta">
+            <span><svg class="icon icon-xxs"><use href="#i-map-pin"></use></svg>1.8 km</span><span>·</span>
+            <span>₹950 for 2</span><span>·</span><span>1.0k reviews</span>
+          </div>
+          <div class="tag-row"><span class="tag">Healthy</span><span class="tag">Vegan</span></div>
+          <button class="btn-gradient btn-book">Book Now</button>
+        </div>
+      </article>
+
+      <article class="r-card">
+        <div class="r-media">
+          <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=400&fit=crop&auto=format" alt="Taco Loco">
+          <div class="r-scrim"></div>
+          <div class="r-top">
+            <span class="r-badge">🎉 Party</span>
+            <button class="fav-btn" aria-label="Add to favorites" aria-pressed="false">
+              <svg class="icon icon-14"><use href="#i-heart"></use></svg>
+            </button>
+          </div>
+          <span class="r-offer">Happy Hour</span>
+          <span class="r-verified"><svg class="icon icon-xs c-secondary"><use href="#i-badge-check"></use></svg>Verified</span>
+        </div>
+        <div class="r-body">
+          <div class="r-title-row">
+            <h3 class="r-name">Taco Loco</h3>
+            <span class="r-rating"><svg class="icon icon-xs filled"><use href="#i-star"></use></svg>4.5</span>
+          </div>
+          <p class="r-cuisine">Mexican · Street Food</p>
+          <div class="r-meta">
+            <span><svg class="icon icon-xxs"><use href="#i-map-pin"></use></svg>3.2 km</span><span>·</span>
+            <span>₹700 for 2</span><span>·</span><span>2.1k reviews</span>
+          </div>
+          <div class="tag-row"><span class="tag">Street Food</span><span class="tag">Party</span></div>
+          <button class="btn-gradient btn-book">Book Now</button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Occasions ───────────────────────────────────────────────────────────── -->
+<section class="section section-muted" id="about">
+  <div class="container">
+    <div class="section-head-center">
+      <h2 class="h-xl">Plan the Perfect Occasion</h2>
+      <p class="section-sub">Every special moment deserves the perfect restaurant</p>
+    </div>
+    <div class="occasion-grid">
+      <button class="occasion" style="--from:#FF5A5F;--to:#FF8FA3">
+        <span class="occasion-icon">❤️</span><h3>Date Night</h3><p>2.4k spots</p>
+        <svg class="icon icon-15 occasion-arrow"><use href="#i-chevron-right"></use></svg>
+      </button>
+      <button class="occasion" style="--from:#7C3AED;--to:#A78BFA">
+        <span class="occasion-icon">🎂</span><h3>Birthday</h3><p>1.8k spots</p>
+        <svg class="icon icon-15 occasion-arrow"><use href="#i-chevron-right"></use></svg>
+      </button>
+      <button class="occasion" style="--from:#F59E0B;--to:#FCD34D">
+        <span class="occasion-icon">🥂</span><h3>Anniversary</h3><p>980 spots</p>
+        <svg class="icon icon-15 occasion-arrow"><use href="#i-chevron-right"></use></svg>
+      </button>
+      <button class="occasion" style="--from:#06D6A0;--to:#34D399">
+        <span class="occasion-icon">👨‍👩‍👧</span><h3>Family</h3><p>3.1k spots</p>
+        <svg class="icon icon-15 occasion-arrow"><use href="#i-chevron-right"></use></svg>
+      </button>
+      <button class="occasion" style="--from:#0EA5E9;--to:#38BDF8">
+        <span class="occasion-icon">💼</span><h3>Corporate</h3><p>650 spots</p>
+        <svg class="icon icon-15 occasion-arrow"><use href="#i-chevron-right"></use></svg>
+      </button>
+      <button class="occasion" style="--from:#F97316;--to:#FB923C">
+        <span class="occasion-icon">🎉</span><h3>Party</h3><p>1.2k spots</p>
+        <svg class="icon icon-15 occasion-arrow"><use href="#i-chevron-right"></use></svg>
+      </button>
+      <button class="occasion" style="--from:#14B8A6;--to:#2DD4BF">
+        <span class="occasion-icon">🍻</span><h3>Friends</h3><p>4.5k spots</p>
+        <svg class="icon icon-15 occasion-arrow"><use href="#i-chevron-right"></use></svg>
+      </button>
+      <button class="occasion" style="--from:#EC4899;--to:#F472B6">
+        <span class="occasion-icon">📸</span><h3>Insta-Worthy</h3><p>2.9k spots</p>
+        <svg class="icon icon-15 occasion-arrow"><use href="#i-chevron-right"></use></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Flash Deals ─────────────────────────────────────────────────────────── -->
+<section class="section" id="deals">
+  <div class="container">
+    <div class="section-head">
+      <div class="head-with-mark">
+        <span class="head-mark">⚡</span>
+        <div>
+          <h2 class="h-lg">Flash Deals</h2>
+          <p class="section-sub-xs">Grab them before they&rsquo;re gone!</p>
+        </div>
+      </div>
+      <button class="link-btn">All Deals <svg class="icon icon-14"><use href="#i-chevron-right"></use></svg></button>
+    </div>
+
+    <div class="deal-grid">
+      <article class="deal-card">
+        <div class="deal-media">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&h=300&fit=crop&auto=format" alt="Bella Vista Bistro">
+          <div class="deal-scrim"></div>
+          <span class="deal-tag" style="background:#FF5A5F">⚡ Flash</span>
+          <span class="deal-timer">
+            <svg class="icon icon-12 c-accent"><use href="#i-clock"></use></svg>
+            <time data-countdown="02:34:18">02:34:18</time>
+          </span>
+        </div>
+        <div class="deal-body">
+          <h3 class="deal-name">Bella Vista Bistro</h3>
+          <p class="deal-desc">Flat 40% OFF on all mains</p>
+          <button class="btn-gradient btn-book">Grab Deal</button>
+        </div>
+      </article>
+
+      <article class="deal-card">
+        <div class="deal-media">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&h=300&fit=crop&auto=format" alt="Zen Garden">
+          <div class="deal-scrim"></div>
+          <span class="deal-tag" style="background:#F97316">🔥 Hot</span>
+          <span class="deal-timer">
+            <svg class="icon icon-12 c-accent"><use href="#i-clock"></use></svg>
+            <time data-countdown="01:12:45">01:12:45</time>
+          </span>
+        </div>
+        <div class="deal-body">
+          <h3 class="deal-name">Zen Garden</h3>
+          <p class="deal-desc">Buy 1 Get 1 FREE on all Sushi rolls</p>
+          <button class="btn-gradient btn-book">Grab Deal</button>
+        </div>
+      </article>
+
+      <article class="deal-card">
+        <div class="deal-media">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500&h=300&fit=crop&auto=format" alt="The Grill House">
+          <div class="deal-scrim"></div>
+          <span class="deal-tag" style="background:#06D6A0">🎁 Free</span>
+          <span class="deal-timer">
+            <svg class="icon icon-12 c-accent"><use href="#i-clock"></use></svg>
+            <time data-countdown="03:45:22">03:45:22</time>
+          </span>
+        </div>
+        <div class="deal-body">
+          <h3 class="deal-name">The Grill House</h3>
+          <p class="deal-desc">Free Brownie on bills above ₹500</p>
+          <button class="btn-gradient btn-book">Grab Deal</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AI Vibe Finder ──────────────────────────────────────────────────────── -->
+<section class="ai-section">
+  <div class="ai-dots" aria-hidden="true"></div>
+  <div class="ai-inner">
+    <p class="pill-badge pill-purple">
+      <svg class="icon icon-xs"><use href="#i-sparkles"></use></svg>
+      AI-Powered Recommendations
+    </p>
+
+    <h2 class="h-2xl on-dark">What&rsquo;s Your Vibe Tonight?</h2>
+    <p class="ai-sub">Pick a mood and our AI finds your perfect restaurant match instantly</p>
+
+    <div class="mood-row" id="mood-row">
+      <button class="mood" style="--c:#FF5A5F"><span>🌹</span>Romantic</button>
+      <button class="mood" style="--c:#FFB703"><span>🎉</span>Party</button>
+      <button class="mood" style="--c:#06D6A0"><span>👨‍👩‍👧</span>Family</button>
+      <button class="mood" style="--c:#7C3AED"><span>😌</span>Peaceful</button>
+      <button class="mood" style="--c:#0EA5E9"><span>💎</span>Luxury</button>
+      <button class="mood" style="--c:#F59E0B"><span>💸</span>Budget</button>
+      <button class="mood" style="--c:#6366F1"><span>🌙</span>Late Night</button>
+      <button class="mood" style="--c:#EF4444"><span>🔥</span>Trending</button>
+    </div>
+
+    <p class="ai-empty" id="ai-empty">Select a mood above to get AI-powered recommendations</p>
+
+    <div class="ai-results" id="ai-results" hidden>
+      <p class="ai-results-label">Top picks for your <strong id="mood-name"></strong> vibe ✨</p>
+      <div class="ai-grid">
+        <div class="ai-card">
+          <div class="ai-media">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=300&h=200&fit=crop&auto=format" alt="The Candlelight Rooftop">
+            <div class="ai-scrim"></div>
+            <span class="ai-match">98% match</span>
+          </div>
+          <div class="ai-body">
+            <p class="ai-name">The Candlelight Rooftop</p>
+            <button class="btn-gradient btn-xs">View &amp; Book</button>
+          </div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-media">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=300&h=200&fit=crop&auto=format" alt="Azure Sky Lounge">
+            <div class="ai-scrim"></div>
+            <span class="ai-match">95% match</span>
+          </div>
+          <div class="ai-body">
+            <p class="ai-name">Azure Sky Lounge</p>
+            <button class="btn-gradient btn-xs">View &amp; Book</button>
+          </div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-media">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=300&h=200&fit=crop&auto=format" alt="Lumière Bistro">
+            <div class="ai-scrim"></div>
+            <span class="ai-match">92% match</span>
+          </div>
+          <div class="ai-body">
+            <p class="ai-name">Lumière Bistro</p>
+            <button class="btn-gradient btn-xs">View &amp; Book</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Gamification ────────────────────────────────────────────────────────── -->
+<section class="section section-muted-soft" id="rewards">
+  <div class="container game-grid">
+
+    <div>
+      <p class="pill-badge pill-amber">
+        <svg class="icon icon-12"><use href="#i-trophy"></use></svg>
+        FOOD EXPLORER PROGRAM
+      </p>
+      <h2 class="h-xl">Your Food Journey <span class="grad-text">Awaits</span></h2>
+      <p class="game-lede">
+        Earn XP, unlock badges, and climb the leaderboard with every dining experience you share.
+      </p>
+
+      <div class="panel">
+        <div class="level-head">
+          <div>
+            <span class="panel-label">Current Level</span>
+            <span class="level-value">Level 7 <span>🧑‍🍳</span></span>
+          </div>
+          <div class="ta-right">
+            <span class="panel-label">Total XP</span>
+            <span class="xp-value">2,340</span>
+          </div>
+        </div>
+        <div class="progress"><div class="progress-fill" style="width:78%"></div></div>
+        <div class="progress-legend">
+          <span>2,340 XP earned</span>
+          <span>3,000 XP for Level 8</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 class="panel-title">
+          <svg class="icon icon-sm c-accent"><use href="#i-award"></use></svg>
+          Achievements
+        </h3>
+        <div class="badge-grid">
+          <div class="ach"><span class="ach-tile is-unlocked">🍕</span><span class="ach-label">Pizza Pro</span></div>
+          <div class="ach"><span class="ach-tile is-unlocked">⭐</span><span class="ach-label">5-Star Fan</span></div>
+          <div class="ach"><span class="ach-tile is-unlocked">🌍</span><span class="ach-label">Explorer</span></div>
+          <div class="ach"><span class="ach-tile">🔥</span><span class="ach-label">Streak 7</span></div>
+          <div class="ach"><span class="ach-tile">💎</span><span class="ach-label">VIP Diner</span></div>
+          <div class="ach"><span class="ach-tile">🏆</span><span class="ach-label">Top Foodie</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-col">
+      <div class="panel panel-spin ta-center">
+        <div class="wheel">🎡</div>
+        <h3 class="h-md">Daily Spin Wheel</h3>
+        <p class="section-sub">Spin to win cashback, free meals &amp; vouchers!</p>
+        <button class="btn-spin">🎰 Spin Now — 1 spin left today</button>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3 class="panel-title">
+            <svg class="icon icon-sm c-primary"><use href="#i-flame"></use></svg>
+            Dining Streak
+          </h3>
+          <span class="streak-count">🔥 12 days</span>
+        </div>
+        <div class="streak-row">
+          <div class="streak-day"><span class="streak-tile is-done">✓</span><span class="streak-label">M</span></div>
+          <div class="streak-day"><span class="streak-tile is-done">✓</span><span class="streak-label">T</span></div>
+          <div class="streak-day"><span class="streak-tile is-done">✓</span><span class="streak-label">W</span></div>
+          <div class="streak-day"><span class="streak-tile is-done">✓</span><span class="streak-label">T</span></div>
+          <div class="streak-day"><span class="streak-tile is-done">✓</span><span class="streak-label">F</span></div>
+          <div class="streak-day"><span class="streak-tile">○</span><span class="streak-label">S</span></div>
+          <div class="streak-day"><span class="streak-tile">○</span><span class="streak-label">S</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="referral">
+          <span class="referral-mark">🎁</span>
+          <div class="referral-body">
+            <h3 class="referral-title">Refer &amp; Earn</h3>
+            <p class="referral-sub">Invite friends and get ₹200 cashback per referral!</p>
+          </div>
+          <button class="btn-invite">Invite</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3 class="panel-title panel-title-sm">
+            <svg class="icon icon-15 c-violet"><use href="#i-trending-up"></use></svg>
+            City Leaderboard
+          </h3>
+          <span class="link-static">View all</span>
+        </div>
+        <div class="lb-row"><span class="lb-rank">🥇</span><span class="lb-avatar">🧑‍🍳</span><span class="lb-name">Priya S.</span><span class="lb-xp">8,420 XP</span></div>
+        <div class="lb-row"><span class="lb-rank">🥈</span><span class="lb-avatar">👩‍🍳</span><span class="lb-name">Arjun M.</span><span class="lb-xp">7,210 XP</span></div>
+        <div class="lb-row is-you"><span class="lb-rank">🥉</span><span class="lb-avatar">😎</span><span class="lb-name">You</span><span class="lb-xp">2,340 XP</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── App banner ──────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="app-banner">
+      <span class="app-deco" aria-hidden="true">🍽️</span>
+      <div class="app-copy">
+        <h2 class="h-xl on-dark">Download the FoodVibe App</h2>
+        <p class="app-sub">
+          Get exclusive app-only deals, instant booking, and real-time table availability — all in your pocket.
+        </p>
+        <div class="store-row">
+          <button class="store-btn">
+            <span class="store-icon">📱</span>
+            <span><span class="store-sub">Download on the</span><span class="store-name">App Store</span></span>
+          </button>
+          <button class="store-btn">
+            <span class="store-icon">📲</span>
+            <span><span class="store-sub">Get it on</span><span class="store-name">Google Play</span></span>
+          </button>
+        </div>
+      </div>
+      <div class="app-phone">
+        <span class="phone-emoji" aria-hidden="true">📱</span>
+        <div class="phone-pills">
+          <span>4.9</span><span>★★★★★</span><span>2M+ downloads</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ─── Footer ──────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="logo-mark">🍽️</span>
+          <span class="logo-text">FoodVibe</span>
+        </div>
+        <p class="footer-blurb">
+          Discover the Vibe Before You Dine. Your AI-powered food adventure awaits — 12,000+ restaurants in 50+ cities.
+        </p>
+        <div class="footer-stores">
+          <button class="mini-btn">📱 App Store</button>
+          <button class="mini-btn">📲 Play Store</button>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Discover</h4>
+        <ul class="footer-list">
+          <li><a href="#trending">Trending</a></li>
+          <li><a href="#">Near Me</a></li>
+          <li><a href="#deals">Offers</a></li>
+          <li><a href="#">New Openings</a></li>
+          <li><a href="#">Top Rated</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Company</h4>
+        <ul class="footer-list">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Support</h4>
+        <ul class="footer-list">
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Advertise</a></li>
+          <li><a href="#">Partners</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 FoodVibe. Made with 🫶 for food lovers everywhere.</p>
+      <div class="social-row">
+        <button aria-label="Instagram">📸</button>
+        <button aria-label="Twitter">🐦</button>
+        <button aria-label="Facebook">📘</button>
+        <button aria-label="YouTube">▶️</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── Mobile bottom nav ───────────────────────────────────────────────────── -->
+<nav class="mobile-nav" aria-label="Mobile">
+  <button class="mnav-item is-active"><svg class="icon"><use href="#i-home"></use></svg><span>Home</span></button>
+  <button class="mnav-item"><svg class="icon"><use href="#i-compass"></use></svg><span>Explore</span></button>
+  <button class="mnav-item"><svg class="icon"><use href="#i-zap"></use></svg><span>Offers</span></button>
+  <button class="mnav-item"><svg class="icon"><use href="#i-gift"></use></svg><span>Rewards</span></button>
+  <button class="mnav-item"><svg class="icon"><use href="#i-user"></use></svg><span>Profile</span></button>
+</nav>
+
+<script src="app.js"></script>
+</body>
+</html>
