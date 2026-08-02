@@ -476,6 +476,9 @@ input {
   gap: var(--sp-10);
   margin-top: var(--sp-10);
   color: #fff;
+  /* The overlay gradient fades to the page background by the bottom of the
+     hero, so white text here needs its own contrast floor. */
+  text-shadow: 0 1px 3px rgba(28, 28, 46, .55), 0 2px 16px rgba(28, 28, 46, .5);
 }
 .hero-stats > div { text-align: center; }
 .stat-num {
@@ -489,8 +492,10 @@ input {
   margin-top: 2px;
   font-size: .75rem;
   font-weight: 500;
-  opacity: .6;
+  opacity: .92;
 }
+.dark .hero-stats { text-shadow: none; }
+.dark .stat-label { opacity: .6; }
 
 /* ============================================================================
    Section scaffolding
@@ -541,6 +546,28 @@ input {
   -ms-overflow-style: none;
 }
 .scroll-x::-webkit-scrollbar { display: none; }
+
+/* Photo fallback — if a remote image can't load (offline, blocked host), the
+   container keeps a branded gradient instead of showing a broken-image icon.
+   app.js adds .img-failed to the wrapper; the gradient sits underneath either
+   way, so slow loads look intentional too. */
+.r-media, .deal-media, .ai-media {
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--primary) 32%, var(--muted)),
+      color-mix(in srgb, var(--accent) 32%, var(--muted)));
+}
+.hero-bg { background: linear-gradient(135deg, #2b1d2e, #1c1c2e); }
+.img-failed img { display: none; }
+.img-failed::after {
+  content: "🍽️";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  opacity: .35;
+}
 
 .hide-xs { display: none; }
 @media (min-width: 640px) { .hide-xs { display: inline-flex; } }

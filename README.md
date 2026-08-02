@@ -23,6 +23,24 @@ python3 -m http.server 8000
 | `index.html` | All markup, plus an inline SVG sprite for the icons |
 | `styles.css` | Design tokens and every component style |
 | `app.js` | Theme toggle, tabs, chips, favourites, mood picker, countdowns |
+| `vendor-images.sh` | Optional: downloads the photos for offline use |
+
+## Working offline
+
+Photos load from Unsplash, so out of the box the page needs a connection to show
+them. If one is missing the card falls back to a branded gradient rather than a
+broken-image icon, so the layout never breaks.
+
+To make the page fully self-contained, run:
+
+```sh
+./vendor-images.sh
+```
+
+That downloads all 13 photos into `assets/img/` and repoints `index.html` at the
+local copies. It's safe to re-run, and `git checkout index.html` reverts to the
+remote URLs. Photos are Unsplash-licensed — check
+<https://unsplash.com/license> before publishing anywhere public.
 
 ## Sections
 

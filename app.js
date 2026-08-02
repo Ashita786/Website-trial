@@ -148,6 +148,16 @@
     });
   }, 1000);
 
+  /* ── Photo fallback ─────────────────────────────────────────────────────── */
+
+  /* Photography is hosted remotely. If a request fails, flag the wrapper so CSS
+     can show its gradient placeholder rather than a broken-image icon. */
+  document.querySelectorAll(".r-media img, .deal-media img, .ai-media img").forEach(function (img) {
+    var fail = function () { img.parentElement.classList.add("img-failed"); };
+    if (img.complete && img.naturalWidth === 0) fail();
+    img.addEventListener("error", fail);
+  });
+
   /* ── Scroll reveal (stands in for motion/react viewport animations) ─────── */
 
   var targets = document.querySelectorAll(
