@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --background: #08080E;
+  --foreground: #FAFAFA;
+  --card: rgba(255, 255, 255, 0.04);
+  --card-foreground: #FAFAFA;
+  --primary: #C94FFF;
+  --primary-foreground: #FFFFFF;
+  --secondary: rgba(255, 255, 255, 0.08);
+  --secondary-foreground: #FAFAFA;
+  --muted: rgba(255, 255, 255, 0.06);
+  --muted-foreground: #9898AA;
+  --accent: #FF3D7F;
+  --accent-foreground: #FFFFFF;
+  --border: rgba(255, 255, 255, 0.1);
+  --ring: #C94FFF;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
